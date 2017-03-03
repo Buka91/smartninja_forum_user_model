@@ -1,0 +1,115 @@
+.name {
+    color: rgb(47, 79, 79);
+    font-size: 18px;
+}
+
+.title {
+    font-weight: bold;
+    color: black;
+    font-size: 18px;
+}
+
+.clock {
+    color: rgb(47, 79, 79);
+    font-size: 18px;
+}
+
+.list {
+    background-color: rgba(100, 149, 237, 0.5);
+    width: 100%;
+    height: 35px;
+    padding-top: 5px;
+    border-top: rgb(95, 158, 160) solid 1px;
+}
+
+.list:visited {
+    background-color: rgba(255, 250, 240, 0.5);
+}
+
+.list:hover {
+    background-color: rgba(169, 169, 169, 0.5);
+}
+
+.row_link {
+    text-decoration: none;
+}
+
+.row_link:hover {
+    text-decoration: none;
+}
+
+.down {
+    margin-top: 50px;
+    display: block; /* Add this */
+}
+
+.reg {
+    margin-top: 100px;
+    display: block;
+}
+
+@media only screen and (max-width: 768px) {
+    .clock {
+        font-size: 15px;
+    }
+
+    .name {
+        font-size: 15px;
+    }
+
+    .title {
+        font-size: 15px;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .clock {
+        font-size: 12px;
+    }
+
+    .name {
+        font-size: 12px;
+    }
+
+    .title {
+        font-size: 12px;
+    }
+
+    .pdate {
+        font-size: 12px;
+    }
+
+    .pname {
+        font-size: 12px;
+    }
+
+    .ptitle {
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .clock {
+        font-size: 10px;
+    }
+
+    .name {
+        font-size: 10px;
+    }
+
+    .title {
+        font-size: 10px;
+    }
+
+    .pdate {
+        font-size: 10px;
+    }
+
+    .pname {
+        font-size: 10px;
+    }
+
+    .ptitle {
+        font-size: 10px;
+    }
+}
