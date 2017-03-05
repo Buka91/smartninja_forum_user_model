@@ -12,6 +12,10 @@ class RegisterHandler(BaseHandler):
 
 class LoginHandler(BaseHandler):
     def get(self):
+        if self.request.cookies.get("user-email") and self.request.cookies.get("current-user"):
+            # user is logged in
+            self.response.delete_cookie(key = "user-email")
+            self.response.delete_cookie(key = "current-user")
         return self.render_template("login.html")
 
     def post(self):

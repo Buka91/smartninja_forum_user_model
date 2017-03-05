@@ -37,10 +37,14 @@ class BaseHandler(webapp2.RequestHandler):
 
 class MainHandler(BaseHandler):
     def get(self):
-        user_email = self.request.cookies.get("user-email")
         topics = Topic.query(Topic.deleted == False).fetch()
-        params = {"user_email": user_email, "topics": topics}
-        return self.render_template("main.html", params = params)
+        user_email = self.request.cookies.get("user-email")
+        if user_email:
+            params = {"topics": topics, "user_email": user_email}
+            return self.render_template("main.html", params = params)
+        else:
+            params = {"topics": topics}
+            return self.render_template("main.html", params = params)
 
     def post(self):
         username = self.request.get("username")
