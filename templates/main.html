@@ -11,7 +11,7 @@
     <h2>Topics</h2>
     <div>
         {% for topic in topics|sort(attribute = 'created', reverse = True) %}
-            <a class="row_link" href="/topic/details/{{topic.key.id()}}"><div class="list"><span class="title col-xs-4">{{topic.title}}</span><span class="name col-xs-4">{{topic.author_username}}</span><span class="clock col-xs-4">{{topic.created.strftime("%d.%m.%Y %H:%M")}}</span></div></a>
+            <a class="row_link" href="/topic/details/{{topic.key.id()}}"><div class="list"><span class="title col-xs-4">{{topic.title}}</span><span class="name col-xs-4 col-xs-push-1">{{topic.author_username}}</span><span class="clock col-xs-4 col-xs-push-2">{{topic.created.strftime("%d.%m.%Y %H:%M")}}</span></div></a>
         {% endfor %}
     </div>
 {% endif %}

@@ -6,6 +6,7 @@
 <div class="row">
     <div class="col-md-6 col-md-offset-3"> <!-- col-md-offset-3 premakne za 3 polja v desno -->
         <form method="post">
+            <input value="{{csrf_token}}" name="csrf_token" type="hidden">
             <div class="form-group">
                 <label>Title</label>
                 <input type="text" class="form-control" name="title" required>

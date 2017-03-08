@@ -7,6 +7,16 @@ import os
 import hashlib
 from models.topic import Topic
 from models.users import User
+from google.appengine.api import memcache
+import uuid
+
+def is_local():
+    if os.environ.get('SERVER_NAME', '').startswith('localhost'):
+        return True
+    elif 'development' in os.environ.get('SERVER_SOFTWARE', '').lower():
+        return True
+    else:
+        return False
 
 template_dir = os.path.join(os.path.dirname(__file__), "../templates")
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), autoescape=False)
@@ -31,6 +41,14 @@ class BaseHandler(webapp2.RequestHandler):
         if cookie_law:
             params["cookies"] = True
 
+        user_email = self.request.cookies.get("user-email")
+        if user_email:
+            params["user_email"] = user_email
+            # CSRF protection
+            csrf_token = str(uuid.uuid4())
+            memcache.add(key = csrf_token, value = user_email, time = 600)
+            params["csrf_token"] = csrf_token
+
         template = jinja_env.get_template(view_filename)
         return self.response.out.write(template.render(params))
 
@@ -38,13 +56,13 @@ class BaseHandler(webapp2.RequestHandler):
 class MainHandler(BaseHandler):
     def get(self):
         topics = Topic.query(Topic.deleted == False).fetch()
-        user_email = self.request.cookies.get("user-email")
-        if user_email:
-            params = {"topics": topics, "user_email": user_email}
-            return self.render_template("main.html", params = params)
-        else:
-            params = {"topics": topics}
-            return self.render_template("main.html", params = params)
+        #user_email = self.request.cookies.get("user-email")
+        #if user_email:
+        #    params = {"topics": topics, "user_email": user_email}
+        #    return self.render_template("main.html", params = params)
+        #else:
+        params = {"topics": topics}
+        return self.render_template("main.html", params = params)
 
     def post(self):
         username = self.request.get("username")
@@ -60,6 +78,7 @@ class MainHandler(BaseHandler):
             return self.render_template("main.html", params = params)
         else:
             return self.write("Username or password are incorrect.")
+
 
 class AboutHandler(BaseHandler):
     def get(self):

@@ -8,12 +8,38 @@
         <div class="panel-heading container-fluid">
             <div class="row">
                 <h3 class="panel-title col-xs-4 ptitle">{{topic.title}}</h3>
-                <p class="col-xs-4 pname">{{topic.author_username}}</p>
-                <p class="col-xs-4 pdate">{{topic.created.strftime("%d.%m.%Y %H:%M")}}</p>
+                <p class="col-xs-4 pname col-xs-push-1">{{topic.author_username}}</p>
+                <p class="col-xs-4 pdate col-xs-push-2">{{topic.created.strftime("%d.%m.%Y %H:%M")}}</p>
             </div>
         </div>
         <div class="panel-body">
             {{topic.content}}
+        </div>
+    </div>
+
+    {% for comment in comments|sort(attribute='created') %}
+        <div class="panel panel-default comment">
+            <div class="panel-heading container-fluid">
+                <div class="row">
+                    <h3 class="panel-title col-xs-4 ptitle">{{comment.topic_title}}</h3>
+                    <p class="col-xs-4 pname col-xs-push-1">{{comment.author_username}}</p>
+                    <p class="col-xs-4 pdate col-xs-push-2">{{comment.created.strftime("%d.%m.%Y %H:%M")}}</p>
+                </div>
+            </div>
+            <div class="panel-body">
+                {{comment.content}}
+            </div>
+        </div>
+    {% endfor %}
+
+    <div class="panel panel-success downAddComment">
+        <div class="panel-heading">Add Comment</div>
+        <div class="panel-body">
+            <form method="post">
+                <input value="{{csrf_token}}" name="csrf_token" type="hidden">
+                <textarea name="get_comment" class="form-control" rows="6"></textarea>
+                <button type="submit" class="btn btn-success downButton pull-right">Submit</button>
+            </form>
         </div>
     </div>
 

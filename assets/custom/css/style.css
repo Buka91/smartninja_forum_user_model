@@ -43,6 +43,18 @@
     display: block; /* Add this */
 }
 
+.comment {
+    margin-top: 20px;
+    display: block;
+}
+
+.downAddComment {
+    margin-top: 100px;
+    display: block;
+    width: 75%;
+    float: right;
+}
+
 .reg {
     margin-top: 100px;
     display: block;
